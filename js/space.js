@@ -1,4 +1,4 @@
-import {initializeStars, drawStars, animateStars, createExplosion, updateParticles } from "./animation.js";
+import {initializeStars, drawStars, animateStars, createExplosion, updateParticles } from "./animation.js"; //import functions from animation module
 
 // canvas
 const canvas = document.getElementById('board');
@@ -56,8 +56,8 @@ let touchX = null; // stores the initial touch position for mobile
 
 function resetGame() {
     
-    alienRows = 2; // initially there will be 2 rows of aliens
-    alienColumns = 3; //initially there will be 3 columns of aliens
+    alienRows = 2; // rows will be reset to 2
+    alienColumns = 3; //columns will be reset to 3
     alienCount = 0; //number of aliens to defeat
     alienVelocityX = 1; //speed of aliens
     
@@ -119,7 +119,7 @@ function showGameOverScreen() {
     gameStarted = false;
     backgroundMusic.pause();  // Stop the music
     backgroundMusic.currentTime = 0;  // Reset the audio to the beginning
-    // Assuming 'user.score' holds the user's score
+    // 'score' holds the user's score
     const resultMessage = document.getElementById('resultMessage');
     resultMessage.textContent = `Your score: ${score}`;  // Update the result message with the user's score
     document.getElementById('gameOverScreen').style.display = 'flex';  // Show the game over screen
@@ -129,8 +129,8 @@ function setCanvasElements() {
     const maxWidth = 600; //maximum width of canvas set to 600px
     const width = Math.min(window.innerWidth, maxWidth); //for smaller screens it will take full width of screen
     const height = width * (600 / 400); // Maintain 3:2 aspect ratio
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width; //set the canvas width according to screen size
+    canvas.height = height; //set the canvas height according to screen size
 
     // Recalculate tile sizes based on the updated canvas size
     tileWidth = canvas.width / columns;
@@ -178,13 +178,13 @@ window.addEventListener('resize', setCanvasElements);
 setCanvasElements();
 
 
-// Adjust the update function to ensure aliens are drawn
+// Game logic
 function update() {
     if(gameStarted && !paused){  
         
     context.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
 
-     // Draw and animate starfield background
+     // Draw and animate star background
      animateStars(canvas.width, canvas.height);
      drawStars(context);
 
@@ -234,7 +234,7 @@ function update() {
         // Bullet collision with aliens
         for (let j = 0; j < alienArray.length; j++) {
             let alien = alienArray[j];
-            if (!bullet.used && alien.alive && Collision(bullet, alien)) { // if bullet is not used and alien is alive
+            if (!bullet.used && alien.alive && Collision(bullet, alien)) { // if bullet and alien collide
                 bullet.used = true; //change the state of bullet to used
                 alien.alive = false; //change state of alien
                 alienCount--; // remove the shot alien
@@ -261,7 +261,7 @@ function update() {
         createAliens();
     }
 
-    //score
+    //draw score
    context.fillStyle="white";
    if (canvas.width <= 400) {
     context.font = "16px Courier"; // Smaller font for screens up to 400px
@@ -282,10 +282,10 @@ function update() {
 // Keyboard control function
 function moveShip(e) {
        if ((e.code === "ArrowLeft" || e.code === "KeyA") && ship.x - shipVelocityX >= 0) {
-        ship.x -= shipVelocityX; // Move left one tile
+        ship.x -= shipVelocityX; // Move ship left one tile
     }
     else if ((e.code === "ArrowRight" || e.code === "KeyD") && ship.x + shipVelocityX + ship.width <= canvas.width) {
-        ship.x += shipVelocityX; // Move right one tile
+        ship.x += shipVelocityX; // Move ship right one tile
     }
 }
 
@@ -344,7 +344,7 @@ function handleTouchEnd() {
     touchX = null; // Reset touch position when the touch ends
 }
 
-// Adjust createAliens function
+// Create aliens function
 function createAliens() {
     alienArray = []; // Clear array to avoid duplications
 
@@ -357,13 +357,13 @@ function createAliens() {
                 y: alienY,
                 width: alien.width,
                 height: alien.height,
-                alive: true, // if no bullet has hit the alien
+                alive: true, // if no bullet has hit the alien, initial state of an alien
             };
 
-            alienArray.push(newAlien);
+            alienArray.push(newAlien); //add new alien to array
         }
     }
-    alienCount = alienArray.length;
+    alienCount = alienArray.length; //number of aliens to defeat in one group/level
 }
 
 
@@ -376,7 +376,7 @@ function shoot(e) {
             y: ship.y,
             width: tileWidth / 8,
             height: tileHeight / 3,
-            used: false, // if the bullet has not hit any aliens
+            used: false, // if the bullet has not hit any aliens, initial state of bullet
         };
         bulletArray.push(bullet);
     }
