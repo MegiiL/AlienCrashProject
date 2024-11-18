@@ -1,0 +1,155 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling */
+    margin: 0;
+    padding-top: 40px; /* Space from the top */
+    padding-bottom: 40px; /* Space from the bottom */
+    padding-right: 1px; /* Space from the right */
+    padding-left: 1px; /* Space from the left */
+    background-color: lightsteelblue;
+}
+
+
+/* Style for mobile-first */
+canvas {
+    display: block;
+    margin: 0 auto;
+    background: black;
+    width: 100%; /* Take up full width of the screen */
+    max-width: 600px; /* Limit to 600px on larger screens */
+    height: calc(100vw * 1.5);
+    max-height: 90vh;
+   
+}
+
+#spaceWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: calc(100vw * 1.5);
+    max-height: 90vh;
+}
+
+#welcomeScreen, #gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#instructionsWrapper {
+    display: flex; /* Use flexbox to arrange items side by side */
+    justify-content: space-between; /* Space them evenly */
+    width: 100%; /* Take full width */
+    max-width: 600px; /* Limit to 600px to fit the canvas */
+    padding: 20px; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+#rules, #moves {
+    color: white;
+    font-size: 1em; /* Adjust font size for readability */
+    width: 45%; /* Limit width of each section */
+}
+
+#rules h2, #moves h2 {
+    color: white;
+    font-size: 1.3em; /* Smaller headings for rules and moves */
+    text-align: center; /* Center the headings */
+}
+
+#rules ul, #moves ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding from the list */
+    margin: 2px; /* Add margin for spacing */
+    text-align: center; /* Center the list items */
+}
+
+#rules ul li, #moves ul li {
+font-size: 1em; /* Smaller list items for readability */
+}
+
+#welcomeScreen h1,  #gameOverScreen h1 {
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    margin-top: 55px;
+    margin-bottom: 5px;
+}
+
+#gameOverScreen h2 {
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 55px;
+    margin-bottom: 5px;
+}
+
+
+@media (max-width: 400px) {
+#welcomeScreen h1, #gameOverScreen h1 {
+font-size: 1.2em; /* Even smaller for very small screens */
+}
+#rules h2, #moves h2, #gameOverScreen h2 {
+font-size: 1.1em; /* Even smaller headings for rules and moves */
+}
+#rules ul li, #moves ul li {
+font-size: 0.9em; /* Smaller list items for better fit */
+}
+}
+
+#playButton,  #replayButton {
+    padding: 10px 10px;
+    font-size: 1em;
+    color: white;
+    background-color: #444;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    border-radius: 5px; /* Rounded edges */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#playButton:hover,  #replayButton:hover {
+    background-color: lightsteelblue;
+}
+
+#gameOverScreen {
+    display: none; /* Hidden until the game ends */
+}
+
+#pauseButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 0;
+    font-size: 1em;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    display: none; /* Hidden until the game starts */
+    width: 20px;   /* Set width */
+    height: 20px;  /* Set height */
+    border-radius: 5px; /* Rounded edges instead of circular */
+    /* Center text using flexbox */
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    /* Adjust line-height to help center the text */
+    line-height: 1em;
+    touch-action: manipulation; /* Prevents double-tap zooming */
+}
