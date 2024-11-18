@@ -1,4 +1,5 @@
-// Starfield properties
+//STAR BACKGROUND AND ALIEN EXPLOSION ANIMATIONS
+
 let stars = []; // array to store individual stars
 
 let particles = []; // array to hold explosion particles
@@ -6,7 +7,7 @@ let particles = []; // array to hold explosion particles
 const numStars = 100; // number of stars 
 const starSpeed = 0.5; // star speed
 
-
+//Star positions, sizes and speed
 export function initializeStars(width, height) {
     stars = []; // clear any existing stars
     for (let i = 0; i < numStars; i++) {
@@ -19,6 +20,8 @@ export function initializeStars(width, height) {
     }
 }
 
+
+//Drawing the stars
 export function drawStars(context) {
     context.fillStyle = "RebeccaPurple"; // stars color
     context.save(); // save the context state
@@ -45,7 +48,7 @@ export function drawStars(context) {
     context.restore(); // restore context state after drawing stars
 }
 
-
+//Star movement
 export function animateStars(width, height) {
     for (let star of stars) {
         // move the star downward
@@ -63,22 +66,21 @@ export function animateStars(width, height) {
 
 
 
-// Function to create a pixelated explosion effect
+// Create a pixelated explosion effect
 export function createExplosion(x, y) {
-    const numParticles = 5; // Number of particles per explosion
+    const numParticles = 5; // number of particles per explosion
     for (let i = 0; i < numParticles; i++) {
         particles.push({
             x: x,
             y: y,
-            // Random size with some particles larger for variation
+            // random size with some particles larger for variation
             size: Math.random() < 0.5 ? 4 : 8, // 50% chance for either 4 or 8 size
-            // Faster and more randomized speed for a burst effect
-            speedX: (Math.random() - 0.5) * 6, // Random X speed between -3 and 3
-            speedY: (Math.random() - 0.5) * 6, // Random Y speed between -3 and 3
-            // Bright purple color with no alpha to make it intense
+            // faster and more randomized speed for a burst effect
+            speedX: (Math.random() - 0.5) * 6, // random X speed between -3 and 3
+            speedY: (Math.random() - 0.5) * 6, // random Y speed between -3 and 3
             color: `rgb(147, 112, 219)`, // purple explosion
-            // Shorter life for a quick burst
-            life: 20 + Math.random() * 10 // Random lifespan between 20 and 30 frames
+            // shorter life for a quick burst
+            life: 20 + Math.random() * 10 // random lifespan between 20 and 30 frames
         });
     }
 }
@@ -88,19 +90,19 @@ export function updateParticles(context) {
     for (let i = particles.length - 1; i >= 0; i--) {
         let particle = particles[i];
 
-        // Move particle
+        // move particle
         particle.x += particle.speedX;
         particle.y += particle.speedY;
         particle.life--;
 
-        // Draw particle as a small square for pixelated look
+        // draw particle as a small square for pixelated look
         context.fillStyle = particle.color;
         context.fillRect(
-            particle.x, particle.y, // Position
-            particle.size, particle.size // Square size
+            particle.x, particle.y, // position
+            particle.size, particle.size // square size
         );
 
-        // Remove particle if life is over
+        // remove particle if life is over
         if (particle.life <= 0) {
             particles.splice(i, 1);
         }
